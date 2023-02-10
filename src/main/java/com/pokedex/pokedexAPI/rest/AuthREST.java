@@ -28,10 +28,12 @@ public class AuthREST {
 	@Autowired
 	private ModelMapper mapper;
 	
+
+	
 	@PostMapping("/login")
 	ResponseEntity<UsuarioDTO> login(@RequestBody LoginDTO login) {
 		
-		Usuario usuario = repo.findByUsuarioSenha(login.getUsuario(), login.getSenha());
+		Usuario usuario = repo.findByLoginAndSenha(login.getUsuario(), login.getSenha());
 		
 		if (usuario != null) {
 			return ResponseEntity.ok().body(mapper.map(usuario, UsuarioDTO.class));
@@ -40,7 +42,7 @@ public class AuthREST {
 		}
 	}
 	
-	/*@GetMapping("/usuarios/{id}")
+	@GetMapping("/usuarios/{id}")
 	public ResponseEntity<UsuarioDTO> obterUsuarioPorId(@PathVariable("id") Long id) {
 	
 		UsuarioDTO usuarioDTO = mapper.map(repo.findById(id), UsuarioDTO.class);
@@ -52,5 +54,5 @@ public class AuthREST {
 		} else 
 			return ResponseEntity.status(404).build();
 			
-	}*/
+	}
 }
