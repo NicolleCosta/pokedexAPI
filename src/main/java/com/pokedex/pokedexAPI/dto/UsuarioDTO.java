@@ -2,24 +2,25 @@ package com.pokedex.pokedexAPI.dto;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 public class UsuarioDTO implements Serializable {
 
 	private static final Long serialVersionUID = 1L;
 	
 	private Long id;
-	private String usuario;
+	private String nome;
 	private String senha;
 
 	public UsuarioDTO() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 	
 
-	public UsuarioDTO(Long id, String usuario, String senha) {
+	public UsuarioDTO(Long id, String nome, String senha) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
+		this.nome = nome;
 		this.senha = senha;
 	}
 
@@ -28,26 +29,30 @@ public class UsuarioDTO implements Serializable {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getUsuario() {
-		return usuario;
+
+	public String getNome() {
+		return nome;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 
 	public String getSenha() {
 		return senha;
 	}
 
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 	
-
 	
 }

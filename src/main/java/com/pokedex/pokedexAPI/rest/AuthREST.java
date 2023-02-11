@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.pokedex.pokedexAPI.dto.LoginDTO;
 import com.pokedex.pokedexAPI.dto.UsuarioDTO;
 import com.pokedex.pokedexAPI.model.Usuario;
@@ -33,7 +34,7 @@ public class AuthREST {
 	@PostMapping("/login")
 	ResponseEntity<UsuarioDTO> login(@RequestBody LoginDTO login) {
 		
-		Usuario usuario = repo.findByLoginAndSenha(login.getUsuario(), login.getSenha());
+		Usuario usuario = repo.findByLoginAndSenha(login.getLogin(), login.getSenha());
 		
 		if (usuario != null) {
 			return ResponseEntity.ok().body(mapper.map(usuario, UsuarioDTO.class));
@@ -52,7 +53,7 @@ public class AuthREST {
 			return ResponseEntity.ok().body(usuarioDTO);
 
 		} else 
-			return ResponseEntity.status(404).build();
+			return ResponseEntity.status(401).build();
 			
 	}
 }

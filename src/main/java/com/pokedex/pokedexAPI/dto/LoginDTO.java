@@ -4,25 +4,26 @@ import java.io.Serializable;
 
 public class LoginDTO implements Serializable{
 
-	private String usuario;
+	private String login;
 	private String senha;
 	
 	public LoginDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	public LoginDTO(String usuario, String senha) {
+	public LoginDTO(String login, String senha) {
 		super();
-		this.usuario = usuario;
+		this.login = login;
 		this.senha = senha;
 	}
 	
-	public String getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return login;
 	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	public String getSenha() {
@@ -34,3 +35,4 @@ public class LoginDTO implements Serializable{
 	}
 		
 }
+

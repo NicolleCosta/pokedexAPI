@@ -7,8 +7,9 @@ import com.pokedex.pokedexAPI.model.Usuario;
 
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	
 	@Query("from Usuario where nome = :login and senha = :senha")
 	public Usuario findByLoginAndSenha(
-			@Param("login") String usuario,
+			@Param("login") String login,
 			@Param("senha") String senha);
 }

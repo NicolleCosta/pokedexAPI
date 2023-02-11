@@ -14,8 +14,8 @@ public class Usuario implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="usuario")
-	private String usuario;
+	@Column(name="nome")
+	private String nome;
 	
 	@Column(name="senha")
 	private String senha;
@@ -26,10 +26,10 @@ public class Usuario implements Serializable {
 	}
 	
 
-	public Usuario(Long id, String usuario, String senha) {
+	public Usuario(Long id, String nome, String senha) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
+		this.nome = nome;
 		this.senha = senha;
 	}
 
@@ -44,12 +44,13 @@ public class Usuario implements Serializable {
 	}
 
 
-	public String getUsuario() {
-		return usuario;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 
