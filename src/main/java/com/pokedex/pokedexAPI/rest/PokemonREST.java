@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,11 +22,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pokedex.pokedexAPI.dto.HabilidadeDTO;
+
 import com.pokedex.pokedexAPI.dto.PokemonDTO;
-import com.pokedex.pokedexAPI.model.Habilidade;
 import com.pokedex.pokedexAPI.model.Pokemon;
-import com.pokedex.pokedexAPI.repository.HabilidadeRepository;
 import com.pokedex.pokedexAPI.repository.PokemonRepository;
 
 
@@ -41,9 +42,6 @@ public class PokemonREST {
 	@Autowired
 	private PokemonRepository PokemonRepo;
 
-	
-	@Autowired
-	private HabilidadeRepository habilidadeRepo;
 
 	@Autowired
 	private ModelMapper mapper;
@@ -54,20 +52,20 @@ public class PokemonREST {
 		return PokemonRepo.count();
 	
 	}
-
+	
 	@GetMapping("/habilidades/top")
 	public List<String> topTipo() {
 
-		return habilidadeRepo.findTopHabilities();
+		return PokemonRepo.TopHabilidades();
 	}
 	
-	/*@GetMapping("/tipos/top")
+	@GetMapping("/tipos/top")
 	public List<String> topTipoPokemon() {
 
 		return PokemonRepo.findTopTipo();
-	}*/
+	}
 
-	
+	/*
 	@GetMapping("/Pokemons")
 	public List<PokemonDTO> obterTodosPokemons() {
 		List<Pokemon> lista = PokemonRepo.findByOrderByNomeAsc();
@@ -86,40 +84,21 @@ public class PokemonREST {
 				.map(e -> mapper.map(e, PokemonDTO.class))
 				.collect(Collectors.toList());
 	}
-
-	@GetMapping("/Pokemons/{id}")
-	public ResponseEntity<PokemonDTO> obterPokemonPorId(@PathVariable("id") Long id) {
+*/
+	@GetMapping("/ProcurarTipo/{tipo}")
+	public List<String> procurarTipo(@PathVariable("tipo") String tipo) {
+		System.out.println(tipo);
+		return PokemonRepo.procurarTipo(tipo);
 	
-		PokemonDTO PokemonDTO = mapper.map(PokemonRepo.findById(id), PokemonDTO.class);
-		
-		if (PokemonDTO != null) {
-			
-			List<Habilidade> listaHabilidade = habilidadeRepo.findAllByIdPokemon(id);
-			
-			List<HabilidadeDTO> listaHabilidadeDTO = listaHabilidade.stream()
-					.map(e -> mapper.map(e, HabilidadeDTO.class))
-					.collect(Collectors.toList());	
-			
-			PokemonDTO.setHabilidades(listaHabilidadeDTO);
-			
-			return ResponseEntity.ok().body(PokemonDTO);
-
-		} else 
-			return ResponseEntity.status(404).build();
-			
+	
 	}
 
 	@PostMapping("/Pokemons")
 	public ResponseEntity<PokemonDTO> inserir(@RequestBody PokemonDTO PokemonDTO) {
-
 		try {
+			//mapeia o que veio da internet (DTO para uma classe dentro do nosso projeto)
+			//Pokemon novo = mapper.map(PokemonDTO,Pokemon.class);
 			Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
-	
-			for (HabilidadeDTO habilidadeDTO : PokemonDTO.getHabilidades() ) {
-				habilidadeDTO.setIdPokemon(Pokemon.getId());
-				habilidadeRepo.save(mapper.map(habilidadeDTO, Habilidade.class));
-			}
-			
 			return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
 
 		} catch (DataIntegrityViolationException e) {
@@ -127,7 +106,7 @@ public class PokemonREST {
 		}
 	}
 	
-
+/*
 	@PutMapping("/Pokemons/{id}")
 	@Transactional 
 	public ResponseEntity<PokemonDTO> alterar(@PathVariable("id") Long id, @RequestBody PokemonDTO PokemonDTO) {
@@ -139,12 +118,7 @@ public class PokemonREST {
 	
 			habilidadeRepo.deleteAllByIdPokemon(id);
 			
-			for (HabilidadeDTO habilidadeDTO : PokemonDTO.getHabilidades() ) {
-				habilidadeDTO.setIdPokemon(Pokemon.getId());
-				habilidadeRepo.save(mapper.map(habilidadeDTO, Habilidade.class));
-			}
-			
-			return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
+						return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
 
 		} catch (DataIntegrityViolationException e) {
 			return ResponseEntity.status(409).build();
@@ -161,6 +135,6 @@ public class PokemonREST {
 
 		return ResponseEntity.ok().body(new PokemonDTO(id, null, null, null, null, null));
 
-	}
+	}*/
 
 }

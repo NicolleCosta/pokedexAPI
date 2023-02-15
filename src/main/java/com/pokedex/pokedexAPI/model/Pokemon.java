@@ -18,44 +18,56 @@ public class Pokemon implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_pokemon")
-	private Long id;
+	private int id_pokemon;
 	
 	@Column(name="nome_pokemon")
 	private String nome;
 	
 	@Column(name="id_usuario")
-	private Long idUsuario;
+	private int id_usuario;
 	
 	@Column(name="tipo_pokemon")
 	private String tipo;
 
 	@Column(name="foto_pokemon")
 	private String foto;
+	
+	@Column(name="habilidade_pokemon")
+	private String habilidade;
 
 	public Pokemon() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Pokemon(Long id, String nome, Long idUsuario, String tipo, String foto) {
+	public Pokemon(int id, String nome, int id_Usuario, String tipo, String foto, String habilidade) {
 		super();
-		this.id = id;
+		this.id_pokemon = id;
 		this.nome = nome;
-		this.idUsuario = idUsuario;
+		this.id_usuario = id_Usuario;
 		this.tipo = tipo;
 		this.foto = foto;
+		this.habilidade = habilidade;
 	}
 
 
 
-	public Long getId() {
-		return id;
+	public String getHabilidade() {
+		return habilidade;
+	}
+
+	public void setHabilidade_pokemon(String habilidade) {
+		this.habilidade = habilidade;
+	}
+
+	public int getI_pokemon() {
+		return id_pokemon;
 	}
 
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId_pokemon(int id_pokemon) {
+		this.id_pokemon = id_pokemon;
 	}
 
 
@@ -72,14 +84,14 @@ public class Pokemon implements Serializable {
 
 
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public int getIdUsuario() {
+		return id_usuario;
 	}
 
 
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setId_usuario(int idUsuario) {
+		this.id_usuario = idUsuario;
 	}
 
 
@@ -90,7 +102,7 @@ public class Pokemon implements Serializable {
 
 
 
-	public void setTipo(String tipo) {
+	public void setTipo_pokemon(String tipo) {
 		this.tipo = tipo;
 	}
 
@@ -102,7 +114,7 @@ public class Pokemon implements Serializable {
 
 
 
-	public void setFoto(String foto) {
+	public void setFoto_pokemon(String foto) {
 		this.foto = foto;
 	}
 

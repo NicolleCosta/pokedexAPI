@@ -6,103 +6,67 @@ import java.util.List;
 
 public class PokemonDTO implements Serializable {
 
-	private Long id;
-	private String nome;
-	private Long idUsuario;
-	private List<HabilidadeDTO> habilidades;
-	private String tipo;
-	private String foto;
+	private int id_pokemon;
+	private String nome_pokemon;
+    private int id_usuario;
+    private String tipo_pokemon;
+    private String foto_pokemon;
+    private String habilidade_pokemon;
+    
+    
+    
+    public PokemonDTO() {
+		super();
+	}
+    
+    public PokemonDTO(int id_pokemon, String nome_pokemon, int id_usuario, String tipo_pokemon, String foto_pokemon,
+			String habilidade_pokemon) {
+		super();
+		this.id_pokemon = id_pokemon;
+		this.nome_pokemon = nome_pokemon;
+		this.id_usuario = id_usuario;
+		this.tipo_pokemon = tipo_pokemon;
+		this.foto_pokemon = foto_pokemon;
+		this.habilidade_pokemon = habilidade_pokemon;
+	}
 	
-	public PokemonDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+    public int getId_pokemon() {
+		return id_pokemon;
 	}
-
-
-
-	public PokemonDTO(Long id, String nome, Long idUsuario, List<HabilidadeDTO> habilidades, String tipo, String foto) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.idUsuario = idUsuario;
-		this.habilidades = habilidades;
-		this.tipo = tipo;
-		this.foto = foto;
+	public void setId_pokemon(int id_pokemon) {
+		this.id_pokemon = id_pokemon;
 	}
-
-
-
-	public Long getId() {
-		return id;
+	public String getNome_pokemon() {
+		return nome_pokemon;
 	}
-
-
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setNome_pokemon(String nome_pokemon) {
+		this.nome_pokemon = nome_pokemon;
 	}
-
-
-
-	public String getNome() {
-		return nome;
+	public int getId_usuario() {
+		return id_usuario;
 	}
-
-
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
-
-
-
-	public Long getIdUsuario() {
-		return idUsuario;
+	public String getTipo_pokemon() {
+		return tipo_pokemon;
 	}
-
-
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setTipo_pokemon(String tipo_pokemon) {
+		this.tipo_pokemon = tipo_pokemon;
 	}
-
-
-
-	public List<HabilidadeDTO> getHabilidades() {
-		return habilidades;
+	public String getFoto_pokemon() {
+		return foto_pokemon;
 	}
-
-
-
-	public void setHabilidades(List<HabilidadeDTO> habilidades) {
-		this.habilidades = habilidades;
+	public void setFoto_pokemon(String foto_pokemon) {
+		this.foto_pokemon = foto_pokemon;
 	}
-
-
-
-	public String getTipo() {
-		return tipo;
+	public String getHabilidade_pokemon() {
+		return habilidade_pokemon;
 	}
-
-
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setHabilidade_pokemon(String habilidade_pokemon) {
+		this.habilidade_pokemon = habilidade_pokemon;
 	}
-
-
-
-	public String getFoto() {
-		return foto;
-	}
-
-
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-
+	
 
 	
 	
