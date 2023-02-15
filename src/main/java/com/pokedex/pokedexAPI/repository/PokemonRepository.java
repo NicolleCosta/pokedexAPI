@@ -19,6 +19,9 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 	public List<Pokemon> findPokemonByHability(@Param("hab") String hab);
 
 	public List<Pokemon> findByOrderByNomeAsc();
+	
+	//@Query ("select tipo_pokemon from pokemon group by tipo_pokemon order by count(*) desc")
+	//public List<String> findTopTipo();
 
 }
 

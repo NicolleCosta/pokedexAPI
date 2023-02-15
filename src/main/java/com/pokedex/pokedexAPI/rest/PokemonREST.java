@@ -30,6 +30,7 @@ import com.pokedex.pokedexAPI.repository.PokemonRepository;
 
 
 
+
 @CrossOrigin
 @RestController
 public class PokemonREST {
@@ -40,6 +41,7 @@ public class PokemonREST {
 	@Autowired
 	private PokemonRepository PokemonRepo;
 
+	
 	@Autowired
 	private HabilidadeRepository habilidadeRepo;
 
@@ -54,11 +56,16 @@ public class PokemonREST {
 	}
 
 	@GetMapping("/habilidades/top")
-	public List<String> topHabilidades() {
+	public List<String> topTipo() {
 
 		return habilidadeRepo.findTopHabilities();
-	
 	}
+	
+	/*@GetMapping("/tipos/top")
+	public List<String> topTipoPokemon() {
+
+		return PokemonRepo.findTopTipo();
+	}*/
 
 	
 	@GetMapping("/Pokemons")
