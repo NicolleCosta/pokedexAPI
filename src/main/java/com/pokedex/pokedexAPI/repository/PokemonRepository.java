@@ -35,7 +35,7 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 
 
 
-	@Query("select nome from Pokemon where tipo_pokemon like ('%',:tipo,'%')")
+	@Query("SELECT nome FROM Pokemon WHERE tipo_pokemon LIKE CONCAT('%', :tipo, '%')")
 	public List<String> procurarTipo(@Param("tipo")String tipo);
 	
 	/*@Query ("select tipo_pokemon from pokemon group by tipo_pokemon order by count(*) desc")
