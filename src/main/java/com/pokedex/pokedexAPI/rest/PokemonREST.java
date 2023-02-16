@@ -32,6 +32,7 @@ import com.pokedex.pokedexAPI.repository.PokemonRepository;
 
 
 
+
 @CrossOrigin
 @RestController
 public class PokemonREST {
@@ -48,14 +49,12 @@ public class PokemonREST {
 
 	@GetMapping("/Pokemons/count")
 	public long contaPokemons() {
-
 		return PokemonRepo.count();
 	
 	}
 	
 	@GetMapping("/habilidades/top")
 	public List<String> topTipo() {
-
 		return PokemonRepo.TopHabilidades();
 	}
 	
@@ -86,10 +85,13 @@ public class PokemonREST {
 	}
 */
 	@GetMapping("/ProcurarTipo/{tipo}")
-	public List<String> procurarTipo(@PathVariable("tipo") String tipo) {
+	public List<PokemonDTO> procurarTipo(@PathVariable("tipo") String tipo) {
+		List<Pokemon> lista = PokemonRepo.findPokemonByTipo(tipo);
 		System.out.println(tipo);
-		return PokemonRepo.procurarTipo(tipo);
-	
+		System.out.println("Size:" + lista.size());
+		return lista.stream()
+				.map(e -> mapper.map(e, PokemonDTO.class))
+				.collect(Collectors.toList());
 	
 	}
 
