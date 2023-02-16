@@ -68,7 +68,4 @@ public class PokemonDTO implements Serializable {
 	}
 	
 
-	
-	
-
 }
