@@ -64,34 +64,48 @@ public class PokemonREST {
 		return PokemonRepo.findTopTipo();
 	}
 
-	/*
+	
 	@GetMapping("/Pokemons")
 	public List<PokemonDTO> obterTodosPokemons() {
 		List<Pokemon> lista = PokemonRepo.findByOrderByNomeAsc();
-		// Converte lista de Entity para lista DTO
-		return lista.stream()
-				.map(e -> mapper.map(e, PokemonDTO.class))
-				.collect(Collectors.toList());
+		
+		List<PokemonDTO> convertido = new ArrayList<>();
+		
+		for(int i = 0; i<lista.size(); i++) {
+			Pokemon pokaux = lista.get(i);
+			PokemonDTO pok = pokaux.toPokemonDTO();
+			convertido.add(pok);
+		}
+
+		return convertido;
 	}
 
-	@GetMapping("/Pokemons/{hab}/habilidades")
-	public List<PokemonDTO> obterPokemonsPorHabilidade(@PathVariable("hab") String hab) {
-		List<Pokemon> lista = PokemonRepo.findPokemonByHability(hab);
-		System.out.println("Size:" + lista.size());
-		// Converte lista de Entity para lista DTO
-		return lista.stream()
-				.map(e -> mapper.map(e, PokemonDTO.class))
-				.collect(Collectors.toList());
-	}
-*/
 	@GetMapping("/ProcurarTipo/{tipo}")
 	public List<String> procurarTipo(@PathVariable("tipo") String tipo) {
 		
 		return PokemonRepo.findPokemonByTipo(tipo);
 	
 	}
+	
+	@GetMapping("/pokemon/{id}")
+	public PokemonDTO getPokemonById(@PathVariable("id") int id){
+		
+		Pokemon pokemon = PokemonRepo.getPokemonById(id);
+		PokemonDTO pokemonDTO = pokemon.toPokemonDTO();
+		
+		System.out.println(pokemonDTO.getNome_pokemon());
+		
+		return pokemonDTO;
+	}
+	
+	@GetMapping("/ProcurarHabilidade/{habilidade}")
+	public List<String> procurarHabilidade(@PathVariable("habilidade") String habilidade) {
+		
+		return PokemonRepo.findPokemonByHabilidade(habilidade);
+	
+	}
 
-	@PostMapping("/Pokemons")
+	@PostMapping("/PokemonCadastro")
 	public ResponseEntity<PokemonDTO> inserir(@RequestBody PokemonDTO PokemonDTO) {
 		try {
 			//mapeia o que veio da internet (DTO para uma classe dentro do nosso projeto)
@@ -104,17 +118,17 @@ public class PokemonREST {
 		}
 	}
 	
-/*
-	@PutMapping("/Pokemons/{id}")
-	@Transactional 
-	public ResponseEntity<PokemonDTO> alterar(@PathVariable("id") Long id, @RequestBody PokemonDTO PokemonDTO) {
 
-		PokemonDTO.setId(id);
+	@PutMapping("/PokemonUpdate/{id}")
+	@Transactional 
+	public ResponseEntity<PokemonDTO> alterar(@PathVariable("id") int id, @RequestBody PokemonDTO PokemonDTO) {
+
+		PokemonDTO.setId_usuario(id);
 		
 		try {
 			Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
 	
-			habilidadeRepo.deleteAllByIdPokemon(id);
+			//habilidadeRepo.deleteAllByIdPokemon(id);
 			
 						return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
 
@@ -122,17 +136,16 @@ public class PokemonREST {
 			return ResponseEntity.status(409).build();
 		}
 	}
-
-	@DeleteMapping("/Pokemons/{id}")
+ 
+	
+	@DeleteMapping("/DeletePokemon/{id_pokemon}")
 	@Transactional 
-	public ResponseEntity<PokemonDTO> remover(@PathVariable("id") Long id) {
+	public void delete(@PathVariable("id_pokemon") int id_pokemon) {
+		
+		PokemonRepo.deletaPokemon(id_pokemon);
 
-		habilidadeRepo.deleteAllByIdPokemon(id);
-
-		PokemonRepo.deleteById(id);
-
-		return ResponseEntity.ok().body(new PokemonDTO(id, null, null, null, null, null));
-
-	}*/
+	}
+	
+	
 
 }

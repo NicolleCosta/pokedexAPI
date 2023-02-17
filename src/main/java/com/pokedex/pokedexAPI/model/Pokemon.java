@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.modelmapper.ModelMapper;
+
+import com.pokedex.pokedexAPI.dto.PokemonDTO;
+
 
 @Entity
 @Table(name="pokemon")
@@ -117,6 +121,18 @@ public class Pokemon implements Serializable {
 	public void setFoto_pokemon(String foto) {
 		this.foto = foto;
 	}
+	
+	public PokemonDTO toPokemonDTO() {
+        ModelMapper modelMapper = new ModelMapper();
+        PokemonDTO pokemonDTO = modelMapper.map(this, PokemonDTO.class);
+        pokemonDTO.setId_usuario(this.id_usuario);
+        pokemonDTO.setId_pokemon(this.id_pokemon);
+        pokemonDTO.setNome_pokemon(this.nome);
+        pokemonDTO.setTipo_pokemon(this.tipo);
+        pokemonDTO.setFoto_pokemon(this.foto);
+        pokemonDTO.setHabilidade_pokemon(this.habilidade);
+        return pokemonDTO;
+    }
 
 }
 	

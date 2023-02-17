@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
+
 public class PokemonDTO implements Serializable {
 
 	private int id_pokemon;
