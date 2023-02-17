@@ -85,13 +85,9 @@ public class PokemonREST {
 	}
 */
 	@GetMapping("/ProcurarTipo/{tipo}")
-	public List<PokemonDTO> procurarTipo(@PathVariable("tipo") String tipo) {
-		List<Pokemon> lista = PokemonRepo.findPokemonByTipo(tipo);
-		System.out.println(tipo);
-		System.out.println("Size:" + lista.size());
-		return lista.stream()
-				.map(e -> mapper.map(e, PokemonDTO.class))
-				.collect(Collectors.toList());
+	public List<String> procurarTipo(@PathVariable("tipo") String tipo) {
+		
+		return PokemonRepo.findPokemonByTipo(tipo);
 	
 	}
 

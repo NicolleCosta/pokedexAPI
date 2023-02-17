@@ -34,8 +34,8 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 	public List<String> findTopTipo();
 
 
-	@Query("SELECT p FROM Pokemon p WHERE UPPER(p.tipo) LIKE UPPER(CONCAT('%', :tipo, '%'))")
-    public List<Pokemon> findPokemonByTipo(@Param("tipo") String tipo);
+	@Query("SELECT nome FROM Pokemon p WHERE UPPER(p.tipo) LIKE UPPER(CONCAT('%', :tipo, '%'))")
+    public List<String> findPokemonByTipo(@Param("tipo") String tipo);
 	
 	/*@Query ("select tipo_pokemon from pokemon group by tipo_pokemon order by count(*) desc")
 	public List<String> findTopTipo();*/
