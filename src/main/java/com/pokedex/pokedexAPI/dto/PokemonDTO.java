@@ -3,6 +3,10 @@ package com.pokedex.pokedexAPI.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+
+import com.pokedex.pokedexAPI.model.Pokemon;
+
 
 
 public class PokemonDTO implements Serializable {
@@ -67,6 +71,20 @@ public class PokemonDTO implements Serializable {
 	public void setHabilidade_pokemon(String habilidade_pokemon) {
 		this.habilidade_pokemon = habilidade_pokemon;
 	}
+	
+	
+	
+	public Pokemon toPokemon() {
+        ModelMapper modelMapper = new ModelMapper();
+        Pokemon pokemon = modelMapper.map(this, Pokemon.class);
+        pokemon.setId_usuario(this.id_usuario);
+        pokemon.setId_pokemon(this.id_pokemon);
+        pokemon.setNome(this.nome_pokemon);
+        pokemon.setTipo_pokemon(this.tipo_pokemon);
+        pokemon.setFoto_pokemon(this.foto_pokemon);
+        pokemon.setHabilidade_pokemon(this.habilidade_pokemon);
+        return pokemon;
+    }
 	
 
 }

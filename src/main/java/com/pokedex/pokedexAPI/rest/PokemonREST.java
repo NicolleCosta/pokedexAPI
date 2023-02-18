@@ -124,13 +124,15 @@ public class PokemonREST {
 	public ResponseEntity<PokemonDTO> alterar(@PathVariable("id") int id, @RequestBody PokemonDTO PokemonDTO) {
 
 		PokemonDTO.setId_usuario(id);
+		Pokemon pokeAux = PokemonDTO.toPokemon();
 		
 		try {
-			Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
-	
-			//habilidadeRepo.deleteAllByIdPokemon(id);
+		//	Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
 			
-						return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
+			PokemonRepo.save(pokeAux);
+		
+			
+						return null;
 
 		} catch (DataIntegrityViolationException e) {
 			return ResponseEntity.status(409).build();

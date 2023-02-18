@@ -133,6 +133,13 @@ public class Pokemon implements Serializable {
         pokemonDTO.setHabilidade_pokemon(this.habilidade);
         return pokemonDTO;
     }
+	
+	
+
+	
+	
+	
+	
 
 }
 	
