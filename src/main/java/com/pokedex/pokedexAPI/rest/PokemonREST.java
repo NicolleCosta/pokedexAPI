@@ -130,8 +130,7 @@ public class PokemonREST {
 		//	Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
 			
 			PokemonRepo.save(pokeAux);
-		
-			
+						
 						return null;
 
 		} catch (DataIntegrityViolationException e) {
@@ -142,10 +141,13 @@ public class PokemonREST {
 	
 	@DeleteMapping("/DeletePokemon/{id_pokemon}")
 	@Transactional 
-	public void delete(@PathVariable("id_pokemon") int id_pokemon) {
+	public ResponseEntity<PokemonDTO> delete(@PathVariable("id_pokemon") int id_pokemon) {
 		
 		PokemonRepo.deletaPokemon(id_pokemon);
-
+		
+		return ResponseEntity.ok().body(null);
+				
+			
 	}
 	
 	
