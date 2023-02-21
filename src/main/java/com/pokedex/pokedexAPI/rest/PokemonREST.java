@@ -110,6 +110,14 @@ public class PokemonREST {
 		try {
 			//mapeia o que veio da internet (DTO para uma classe dentro do nosso projeto)
 			//Pokemon novo = mapper.map(PokemonDTO,Pokemon.class);
+			Pokemon pokeconsulta = mapper.map(PokemonDTO, Pokemon.class);
+			Pokemon aux = PokemonRepo.findByNome(pokeconsulta.getNome());
+			if (pokeconsulta.getNome().equals(aux.getNome())) {
+				return ResponseEntity.status(409).build();
+			}
+			
+			
+			
 			Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
 			return ResponseEntity.ok().body(mapper.map(Pokemon, PokemonDTO.class));
 
@@ -125,9 +133,14 @@ public class PokemonREST {
 
 		PokemonDTO.setId_usuario(id);
 		Pokemon pokeAux = PokemonDTO.toPokemon();
+		Pokemon pokeNome = PokemonRepo.findByNome(pokeAux.getNome());
 		
 		try {
 		//	Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
+			
+			if (pokeAux.getNome().equals(pokeNome.getNome())) {
+				return ResponseEntity.status(409).build();
+			}
 			
 			PokemonRepo.save(pokeAux);
 						

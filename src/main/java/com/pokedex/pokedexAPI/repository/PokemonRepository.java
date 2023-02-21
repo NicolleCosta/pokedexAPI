@@ -39,6 +39,8 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 	@Modifying
 	@Query("DELETE FROM Pokemon WHERE id_pokemon = :id_pokemon")
 	public void deletaPokemon(int id_pokemon);
+
+	public Pokemon findByNome(String nome);
 	
 
 }
