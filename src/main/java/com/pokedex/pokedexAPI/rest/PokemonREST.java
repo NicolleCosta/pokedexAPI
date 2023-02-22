@@ -130,21 +130,32 @@ public class PokemonREST {
 	@PutMapping("/PokemonUpdate/{id}")
 	@Transactional 
 	public ResponseEntity<PokemonDTO> alterar(@PathVariable("id") int id, @RequestBody PokemonDTO PokemonDTO) {
-
+		System.out.println(PokemonDTO.getNome_pokemon());
+		System.out.println(PokemonDTO.getHabilidade_pokemon());
+		System.out.println(PokemonDTO.getTipo_pokemon());
+		System.out.println(PokemonDTO.getId_pokemon());
+		System.out.println();
+		
+		
+		
+		
 		PokemonDTO.setId_usuario(id);
 		Pokemon pokeAux = PokemonDTO.toPokemon();
-		Pokemon pokeNome = PokemonRepo.findByNome(pokeAux.getNome());
+		System.out.println(pokeAux.getNome() + "nome pokeaux");
+		
+		Pokemon pokeNome = PokemonRepo.getPokemonById(pokeAux.getI_pokemon());
+		System.out.println(pokeNome.getNome() + "nome pokenome");
 		
 		try {
 		//	Pokemon Pokemon = PokemonRepo.save(mapper.map(PokemonDTO, Pokemon.class));
-			
+		/*	
 			if (pokeAux.getNome().equals(pokeNome.getNome())) {
 				return ResponseEntity.status(409).build();
 			}
-			
+			*/
 			PokemonRepo.save(pokeAux);
-						
-						return null;
+						PokemonDTO = pokeAux.toPokemonDTO();
+						return ResponseEntity.ok().body(PokemonDTO);
 
 		} catch (DataIntegrityViolationException e) {
 			return ResponseEntity.status(409).build();

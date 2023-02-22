@@ -43,6 +43,8 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
 	public Pokemon findByNome(String nome);
 	
 
+	
+
 }
 
 
